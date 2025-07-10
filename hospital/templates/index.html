@@ -1,0 +1,148 @@
+{% extends "base.html" %} {% block title %}Home{% endblock title %} {% load
+static %} {% block content %}
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+<style>
+  .services-card,
+  .dep-card {
+    background-color: #202020;
+    color: aliceblue;
+    transition: all 0.3s ease-in-out;
+  }
+  .services-card:hover,
+  .dep-card:hover {
+    background-color: #0d6efd;
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
+  .rnews {
+    background-color: #202020;
+    color: aliceblue;
+  }
+  .rnews:hover {
+    background-color: #234582;
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
+</style>
+<section class="hero">
+  <img
+    src="https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/6369d082320721.5d1a307970a59.jpg"
+    alt="Hospital Entrance"
+    height="300px"
+    width="100%"
+  />
+</section>
+
+<!-- Welcome Text -->
+
+<section class="text-center my-5" 
+  data-aos="zoom-in"
+  data-aos-delay="300"
+  data-aos-duration="1000"
+  data-aos-easing="ease-in-out"
+  >
+  
+  <h2 style="font-size: 2.5rem; font-weight: bold;">Welcome to HealthCare Hub</h2>
+  <p style="font-size: 1.2rem; color: #555; max-width: 600px; margin: 0 auto;">
+    Providing top-notch health services with compassion and dedication.<br />
+    Explore our offerings and get in touch with our medical experts.
+  </p>
+</section>
+
+<!-- Services -->
+<section class="container mb-5">
+  <h4 class="mb-3">Our Services</h4>
+  <div class="row g-4">
+    <div class="col-md-4">
+      <div class="card card-blue p-3 h-100 rounded-3 services-card my-animation">
+        <h5>Emergency Care</h5>
+        <p>24/7 emergency services with expert staff always ready to assist.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card card-dark p-3 h-100 rounded-3 services-card my-animation">
+        <h5>Outpatient Services</h5>
+        <p>Convenient outpatient services to cater to your health needs.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card card-dark p-3 h-100 rounded-3 services-card my-animation">
+        <h5>Surgical Procedures</h5>
+        <p>Advanced surgical care with state-of-the-art equipment.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Recent News -->
+<section class="container mb-5">
+  <h4 class="mb-3">Recent News</h4>
+  <div class="row g-4">
+    {% for r in rn %}
+    <div class="col-md-6 my-animation">
+      <div
+        class="card card-blue p-3 d-flex flex-row align-items-center h-100 rnews"
+      >
+        <img
+          src="{{r.img.url}}"
+          alt="Doctors"
+          class="me-3 rounded"
+          width="80"
+          height="80"
+        />
+        <div>
+          <h5>{{r.heading}}</h5>
+          <p class="mb-0">
+            {{r.news}}
+          </p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+
+  </div>
+</section>
+
+<!-- Departments -->
+<section class="container mb-5">
+  <h4 class="mb-3">Highlighted Departments</h4>
+  <div class="row g-4">
+    <div class="col-md-4 my-animation">
+      <div class="card card-blue p-3 h-100 dep-card">
+        <h5>Cardiology</h5>
+        <p>Expert cardiologists providing comprehensive heart care.</p>
+      </div>
+    </div>
+    <div class="col-md-4 my-animation">
+      <div class="card card-dark p-3 h-100 dep-card">
+        <h5>Neurology</h5>
+        <p>Advanced neurological treatments and patient-centric approaches.</p>
+      </div>
+    </div>
+    <div class="col-md-4 my-animation">
+      <div class="card card-dark p-3 h-100 dep-card">
+        <h5>Orthopedics</h5>
+        <p>Comprehensive orthopedic care with personalized treatment plans.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<script src="https://unpkg.com/scrollreveal"></script>
+<script>
+  ScrollReveal().reveal('.my-animation', {
+    origin: 'bottom',
+    distance: '50px',
+    duration: 1000,
+    delay: 200,
+    opacity: 0,
+    scale: 0.9,
+    easing: 'ease-in-out',
+    reset: true, // animates again every time it comes into view
+  });
+</script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init();
+</script>
+
+{% endblock content %} 

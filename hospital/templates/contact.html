@@ -1,0 +1,167 @@
+{% extends "base.html" %}
+{% block title %}Contact Us{% endblock title %}
+
+{% block content %}
+<style>
+  .btn-submit {
+    background-color: #1f3b77;
+    color: white;
+    border-radius: 20px;
+    padding: 10px 30px;
+    width: 100%;
+  }
+
+  .is-invalid {
+    border-color: #dc3545 !important;
+  }
+
+  .spinner-border {
+    width: 1.3rem;
+    height: 1.3rem;
+    vertical-align: middle;
+  }
+</style>
+
+<div class="container">
+  <!-- Contact Section -->
+  <section class="container py-5">
+    <div class="row g-4">
+      <!-- Contact Form -->
+      <div class="col-md-7">
+        <div class="card p-4">
+          <h4 class="mb-4">Contact Us</h4>
+          <form id="contactForm" method="post" novalidate>
+            {% csrf_token %}
+
+            <div class="mb-3">
+              {{ contact_form.name.label_tag }}
+              {{ contact_form.name }}
+              <div class="text-danger d-none">This field is required.</div>
+            </div>
+
+            <div class="mb-3">
+              {{ contact_form.email.label_tag }}
+              {{ contact_form.email }}
+              <div class="text-danger d-none">This field is required.</div>
+            </div>
+
+            <div class="mb-3">
+              {{ contact_form.phone.label_tag }}
+              {{ contact_form.phone }}
+              <div class="text-danger d-none">This field is required.</div>
+            </div>
+
+            <div class="mb-3">
+              {{ contact_form.message.label_tag }}
+              {{ contact_form.message }}
+              <div class="text-danger d-none">This field is required.</div>
+            </div>
+
+            <button id="submitBtn" type="submit" class="btn btn-submit mt-3">
+              Send Message <span id="loadingSpinner" class="spinner-border spinner-border-sm d-none"></span>
+            </button>
+          </form>
+
+          <!-- Success/Error Alerts -->
+          <div id="successMsg" class="alert alert-success mt-3 d-none">✅ Your message was sent successfully!</div>
+          <div id="errorMsg" class="alert alert-danger mt-3 d-none">❌ Something went wrong. Please try again.</div>
+        </div>
+      </div>
+
+      <!-- Location & Map -->
+      <div class="col-md-5">
+        <div class="card p-4">
+          <h5>Our Location</h5>
+          <p>
+            123 HealthCare Drive, Wellsville<br>
+            Phone: (123) 456-7890<br>
+            Email: contact@healthcarehub.com
+          </p>
+          <iframe class="img-fluid" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d36708166.63035599!2d60.07759268441987!3d19.193550900038495!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30635ff06b92b791%3A0xd78c4fa1854213a6!2sIndia!5e0!3m2!1sen!2sin!4v1751212230275!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- Scripts -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const form = document.getElementById('contactForm');
+  const fields = form.querySelectorAll('input, textarea');
+  const submitBtn = document.getElementById('submitBtn');
+  const spinner = document.getElementById('loadingSpinner');
+  const successMsg = document.getElementById('successMsg');
+  const errorMsg = document.getElementById('errorMsg');
+
+  // Blur validation
+  fields.forEach(field => {
+    field.addEventListener('blur', () => {
+      const errorDiv = field.nextElementSibling;
+      if (field.value.trim() === '') {
+        field.classList.add('is-invalid');
+        errorDiv.classList.remove('d-none');
+      } else {
+        field.classList.remove('is-invalid');
+        errorDiv.classList.add('d-none');
+      }
+    });
+  });
+
+  // AJAX form submission
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    // Basic check before sending
+    let isValid = true;
+    fields.forEach(field => {
+      const errorDiv = field.nextElementSibling;
+      if (field.value.trim() === '') {
+        field.classList.add('is-invalid');
+        errorDiv.classList.remove('d-none');
+        isValid = false;
+      } else {
+        field.classList.remove('is-invalid');
+        errorDiv.classList.add('d-none');
+      }
+    });
+
+    if (!isValid) return;
+
+    // Submit via fetch
+    spinner.classList.remove('d-none');
+    submitBtn.disabled = true;
+
+    const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    const formData = new FormData(form);
+
+    fetch("{% url 'contact' %}", {
+      method: 'POST',
+      headers: {
+        'X-CSRFToken': csrfToken
+      },
+      body: formData
+    })
+    .then(response => {
+      spinner.classList.add('d-none');
+      submitBtn.disabled = false;
+
+      if (response.ok) {
+        form.reset();
+        successMsg.classList.remove('d-none');
+        errorMsg.classList.add('d-none');
+      } else {
+        throw new Error('Network error');
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      spinner.classList.add('d-none');
+      submitBtn.disabled = false;
+      successMsg.classList.add('d-none');
+      errorMsg.classList.remove('d-none');
+    });
+  });
+});
+</script>
+{% endblock content %}
