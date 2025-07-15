@@ -31,7 +31,7 @@ A full-stack web application built using **Django** that allows users to view do
 
 ```bash
 git clone https://github.com/sibin-project/django_hospital.git
-cd django_hospital
+cd hospital
 python -m venv venv
 source venv/bin/activate  # or venv\Scripts\activate (Windows)
 pip install -r requirements.txt
