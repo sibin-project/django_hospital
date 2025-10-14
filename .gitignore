@@ -1,3 +1,8 @@
-venv
-hospital/db.sqlite3
-hospital/media
+# Ignore virtual environment
+venv/
+
+# Ignore SQLite database
+db.sqlite3
+
+# Ignore media uploads
+hospital/media/
