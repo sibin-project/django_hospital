@@ -1,9 +1,3 @@
 venv
-db.sqlite3
-__pycache__/
-*.pyc
-.DS_Store
-*.log
-*.sqlite3
-.env
-migrations/
+hospital/db.sqlite3
+hospital/media
