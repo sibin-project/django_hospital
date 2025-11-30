@@ -1,47 +1,16 @@
-{% extends "base.html" %} {% block title %}About{% endblock title %} {% load
-static %} {% block content %}
-<style>
-  body {
-    background-color: #eaf6ff;
-  }
-  .navbar {
-    background-color: #1f3b77;
-  }
-  .navbar-brand,
-  .nav-link {
-    color: white !important;
-    font-weight: 500;
-  }
-  .card-blue {
-    color: white;
-    background-color: #333;
-  }
-  .card-dark {
-    background-color: #333;
-    color: white;
-  }
-  .card-blue:hover,.card-dark:hover {
-    background-color: #1a73e8;
-    transform: scale(1.05);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  }
+{% extends "base.html" %}
+{% block title %}About{% endblock title %}
+{% load static %}
+{% block content %}
 
-  .team-img {
-    width: 130px;
-    height: 130px;
-    object-fit: cover;
-    border-radius: 50%;
-    border: 4px solid white;
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
-  }
-
-</style>
-<section class="text-center py-5">
-  <div class="container fade-in-box">
-    <h2>About Us</h2>
-    <p>
+<section class="section-padding text-center">
+  <div class="container" data-aos="fade-up">
+    <h6 class="text-primary fw-bold text-uppercase">Who We Are</h6>
+    <h2 class="mb-3">About HealthCare Hub</h2>
+    <p class="text-secondary mx-auto" style="max-width: 700px;">
       Discover the story behind HealthCare Hub, our mission, vision, and the
-      dedicated team that makes it all possible.
+      dedicated team that makes it all possible. We are committed to providing the best healthcare services to our
+      community.
     </p>
   </div>
 </section>
@@ -49,69 +18,70 @@ static %} {% block content %}
 <!-- Mission, Vision, Values -->
 <section class="container mb-5">
   <div class="row g-4">
-    <div class="col-md-4">
-      <div class="card card-blue p-3 h-100 my-element">
-        <h5>Our Mission</h5>
-        <p>
+    <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+      <div class="card h-100 p-4 text-center">
+        <div class="mb-3">
+          <i class="fa-solid fa-bullseye fa-3x text-primary"></i>
+        </div>
+        <h4 class="mb-3">Our Mission</h4>
+        <p class="text-secondary">
           To provide compassionate, innovative, and superior healthcare services
-          to our community.
+          to our community, ensuring every patient receives the best care possible.
         </p>
       </div>
     </div>
-    <div class="col-md-4">
-      <div class="card card-dark p-3 h-100 my-element">
-        <h5>Our Vision</h5>
-        <p>
+    <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+      <div class="card h-100 p-4 text-center">
+        <div class="mb-3">
+          <i class="fa-solid fa-eye fa-3x text-primary"></i>
+        </div>
+        <h4 class="mb-3">Our Vision</h4>
+        <p class="text-secondary">
           To be the leading healthcare provider, known for delivering
-          exceptional patient care and pioneering medical advancements.
+          exceptional patient care and pioneering medical advancements in the region.
         </p>
       </div>
     </div>
-    <div class="col-md-4">
-      <div class="card card-dark p-3 h-100 my-element">
-        <h5>Our Values</h5>
-        <p>Integrity, Excellence, Compassion, Respect, and Innovation.</p>
+    <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+      <div class="card h-100 p-4 text-center">
+        <div class="mb-3">
+          <i class="fa-solid fa-gem fa-3x text-primary"></i>
+        </div>
+        <h4 class="mb-3">Our Values</h4>
+        <p class="text-secondary">Integrity, Excellence, Compassion, Respect, and Innovation are the core values that
+          drive us every single day.</p>
       </div>
     </div>
   </div>
 </section>
-
 
 <!-- Meet the Team -->
-<section class="container mb-5 text-center">
-  <h4 class="mb-4 fade-in-box">Meet Our Team</h4>
-  <div class="row g-4 justify-content-center">
-    {% for t in team %}
-    <div class="col-6 col-sm-3 fade-in-box">
-      <img src="{{t.img.url}}" alt="{{t.name}}" class="team-img mb-2" />
-      <h6>{{t.name}}</h6>
-      <p class="text-muted">{{t.position}}</p>
+<section class="section-padding bg-light-blue">
+  <div class="container text-center">
+    <div class="mb-5" data-aos="fade-up">
+      <h6 class="text-primary fw-bold text-uppercase">Leadership</h6>
+      <h2 class="mb-3">Meet Our Team</h2>
     </div>
-    {% endfor %}
+
+    <div class="row g-4 justify-content-center">
+      {% if team %}
+      {% for t in team %}
+      <div class="col-6 col-sm-3" data-aos="fade-up" data-aos-delay="{{ forloop.counter0 }}00">
+        <div class="card h-100 p-3 border-0 shadow-sm align-items-center">
+          <img src="{{t.img.url}}" alt="{{t.name}}" class="rounded-circle mb-3 object-fit-cover shadow-sm"
+            style="width: 130px; height: 130px;" />
+          <h6 class="fw-bold mb-1">{{t.name}}</h6>
+          <p class="text-muted small mb-0">{{t.position}}</p>
+        </div>
+      </div>
+      {% endfor %}
+      {% else %}
+      <div class="col-12 text-center">
+        <p class="text-muted">No team members to display.</p>
+      </div>
+      {% endif %}
+    </div>
   </div>
 </section>
-<script src="https://unpkg.com/scrollreveal"></script>
-<script>
-  ScrollReveal().reveal('.my-element', {
-    origin: 'bottom',
-    distance: '50px',
-    duration: 1000,
-    delay: 200,
-    opacity: 0,
-    scale: 0.9,
-    easing: 'ease-in-out',
-    reset: true, // animates again every time it comes into view
-  });
-</script>
-  <script>
-    ScrollReveal().reveal('.fade-in-box', {
-      duration: 1000,
-      opacity: 0,
-      distance: '0px',
-      easing: 'ease-in',
-      reset: false
-    });
-  </script>
-
 
 {% endblock content %}

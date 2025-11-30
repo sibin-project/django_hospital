@@ -1,148 +1,155 @@
-{% extends "base.html" %} {% block title %}Home{% endblock title %} {% load
-static %} {% block content %}
-<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-<style>
-  .services-card,
-  .dep-card {
-    background-color: #202020;
-    color: aliceblue;
-    transition: all 0.3s ease-in-out;
-  }
-  .services-card:hover,
-  .dep-card:hover {
-    background-color: #0d6efd;
-    transform: scale(1.05);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  }
-  .rnews {
-    background-color: #202020;
-    color: aliceblue;
-  }
-  .rnews:hover {
-    background-color: #234582;
-    transform: scale(1.05);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  }
-</style>
-<section class="hero">
-  <img
-    src="https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/6369d082320721.5d1a307970a59.jpg"
-    alt="Hospital Entrance"
-    height="300px"
-    width="100%"
-  />
-</section>
+{% extends "base.html" %}
+{% block title %}Home{% endblock title %}
+{% load static %}
 
-<!-- Welcome Text -->
-
-<section class="text-center my-5" 
-  data-aos="zoom-in"
-  data-aos-delay="300"
-  data-aos-duration="1000"
-  data-aos-easing="ease-in-out"
-  >
-  
-  <h2 style="font-size: 2.5rem; font-weight: bold;">Welcome to HealthCare Hub</h2>
-  <p style="font-size: 1.2rem; color: #555; max-width: 600px; margin: 0 auto;">
-    Providing top-notch health services with compassion and dedication.<br />
-    Explore our offerings and get in touch with our medical experts.
-  </p>
-</section>
-
-<!-- Services -->
-<section class="container mb-5">
-  <h4 class="mb-3">Our Services</h4>
-  <div class="row g-4">
-    <div class="col-md-4">
-      <div class="card card-blue p-3 h-100 rounded-3 services-card my-animation">
-        <h5>Emergency Care</h5>
-        <p>24/7 emergency services with expert staff always ready to assist.</p>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="card card-dark p-3 h-100 rounded-3 services-card my-animation">
-        <h5>Outpatient Services</h5>
-        <p>Convenient outpatient services to cater to your health needs.</p>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="card card-dark p-3 h-100 rounded-3 services-card my-animation">
-        <h5>Surgical Procedures</h5>
-        <p>Advanced surgical care with state-of-the-art equipment.</p>
-      </div>
+{% block content %}
+<!-- Hero Section -->
+<section class="position-relative text-white text-center d-flex align-items-center justify-content-center"
+  style="min-height: 80vh; background: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.7)), url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;">
+  <div class="container" data-aos="fade-up">
+    <h1 class="display-3 fw-bold mb-4 text-white">Welcome to HealthCare Hub</h1>
+    <p class="lead mb-5 mx-auto" style="max-width: 700px;">
+      Providing top-notch health services with compassion and dedication.
+      Explore our offerings and get in touch with our medical experts.
+    </p>
+    <div class="d-flex justify-content-center gap-3">
+      <a href="/booking" class="btn btn-primary btn-lg">Book Appointment</a>
+      <a href="/about" class="btn btn-outline-light btn-lg">Learn More</a>
     </div>
   </div>
 </section>
 
-<!-- Recent News -->
-<section class="container mb-5">
-  <h4 class="mb-3">Recent News</h4>
-  <div class="row g-4">
-    {% for r in rn %}
-    <div class="col-md-6 my-animation">
-      <div
-        class="card card-blue p-3 d-flex flex-row align-items-center h-100 rnews"
-      >
-        <img
-          src="{{r.img.url}}"
-          alt="Doctors"
-          class="me-3 rounded"
-          width="80"
-          height="80"
-        />
-        <div>
-          <h5>{{r.heading}}</h5>
-          <p class="mb-0">
-            {{r.news}}
+<!-- Services Section -->
+<section class="section-padding bg-light-blue">
+  <div class="container">
+    <div class="text-center mb-5" data-aos="fade-up">
+      <h6 class="text-primary fw-bold text-uppercase">Our Services</h6>
+      <h2 class="mb-3">Comprehensive Care for You</h2>
+      <p class="text-secondary mx-auto" style="max-width: 600px;">We offer a wide range of medical services to ensure
+        your health and well-being are always in good hands.</p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+        <div class="card h-100 p-4 text-center">
+          <div class="mb-3">
+            <i class="fa-solid fa-truck-medical fa-3x text-primary"></i>
+          </div>
+          <h4 class="mb-3">Emergency Care</h4>
+          <p class="text-secondary">24/7 emergency services with expert staff always ready to assist you in critical
+            moments.</p>
+        </div>
+      </div>
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+        <div class="card h-100 p-4 text-center">
+          <div class="mb-3">
+            <i class="fa-solid fa-user-doctor fa-3x text-primary"></i>
+          </div>
+          <h4 class="mb-3">Outpatient Services</h4>
+          <p class="text-secondary">Convenient outpatient services designed to cater to your routine health checkups and
+            needs.</p>
+        </div>
+      </div>
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+        <div class="card h-100 p-4 text-center">
+          <div class="mb-3">
+            <i class="fa-solid fa-procedures fa-3x text-primary"></i>
+          </div>
+          <h4 class="mb-3">Surgical Procedures</h4>
+          <p class="text-secondary">Advanced surgical care with state-of-the-art equipment and highly skilled surgeons.
           </p>
         </div>
       </div>
     </div>
-    {% endfor %}
-
   </div>
 </section>
 
-<!-- Departments -->
-<section class="container mb-5">
-  <h4 class="mb-3">Highlighted Departments</h4>
-  <div class="row g-4">
-    <div class="col-md-4 my-animation">
-      <div class="card card-blue p-3 h-100 dep-card">
-        <h5>Cardiology</h5>
-        <p>Expert cardiologists providing comprehensive heart care.</p>
-      </div>
+<!-- Departments Section -->
+<section class="section-padding">
+  <div class="container">
+    <div class="text-center mb-5" data-aos="fade-up">
+      <h6 class="text-primary fw-bold text-uppercase">Departments</h6>
+      <h2 class="mb-3">Specialized Medical Departments</h2>
     </div>
-    <div class="col-md-4 my-animation">
-      <div class="card card-dark p-3 h-100 dep-card">
-        <h5>Neurology</h5>
-        <p>Advanced neurological treatments and patient-centric approaches.</p>
+
+    <div class="row g-4">
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+        <div class="card h-100 overflow-hidden">
+          <div class="card-body p-4">
+            <div class="d-flex align-items-center mb-3">
+              <div class="bg-light-blue p-3 rounded-circle me-3">
+                <i class="fa-solid fa-heart-pulse text-primary fa-xl"></i>
+              </div>
+              <h4 class="mb-0">Cardiology</h4>
+            </div>
+            <p class="text-secondary">Expert cardiologists providing comprehensive heart care, from diagnosis to
+              rehabilitation.</p>
+            <a href="/department" class="text-primary fw-bold text-decoration-none">Read More <i
+                class="fa-solid fa-arrow-right ms-1"></i></a>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="col-md-4 my-animation">
-      <div class="card card-dark p-3 h-100 dep-card">
-        <h5>Orthopedics</h5>
-        <p>Comprehensive orthopedic care with personalized treatment plans.</p>
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+        <div class="card h-100 overflow-hidden">
+          <div class="card-body p-4">
+            <div class="d-flex align-items-center mb-3">
+              <div class="bg-light-blue p-3 rounded-circle me-3">
+                <i class="fa-solid fa-brain text-primary fa-xl"></i>
+              </div>
+              <h4 class="mb-0">Neurology</h4>
+            </div>
+            <p class="text-secondary">Advanced neurological treatments and patient-centric approaches for brain and
+              spine health.</p>
+            <a href="/department" class="text-primary fw-bold text-decoration-none">Read More <i
+                class="fa-solid fa-arrow-right ms-1"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+        <div class="card h-100 overflow-hidden">
+          <div class="card-body p-4">
+            <div class="d-flex align-items-center mb-3">
+              <div class="bg-light-blue p-3 rounded-circle me-3">
+                <i class="fa-solid fa-bone text-primary fa-xl"></i>
+              </div>
+              <h4 class="mb-0">Orthopedics</h4>
+            </div>
+            <p class="text-secondary">Comprehensive orthopedic care with personalized treatment plans for joint and bone
+              health.</p>
+            <a href="/department" class="text-primary fw-bold text-decoration-none">Read More <i
+                class="fa-solid fa-arrow-right ms-1"></i></a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
-<script src="https://unpkg.com/scrollreveal"></script>
-<script>
-  ScrollReveal().reveal('.my-animation', {
-    origin: 'bottom',
-    distance: '50px',
-    duration: 1000,
-    delay: 200,
-    opacity: 0,
-    scale: 0.9,
-    easing: 'ease-in-out',
-    reset: true, // animates again every time it comes into view
-  });
-</script>
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>
-  AOS.init();
-</script>
 
-{% endblock content %} 
+{% if rn %}
+<!-- Recent News Section -->
+<section class="section-padding bg-light-blue">
+  <div class="container">
+    <div class="text-center mb-5" data-aos="fade-up">
+      <h6 class="text-primary fw-bold text-uppercase">Latest Updates</h6>
+      <h2 class="mb-3">Recent News & Events</h2>
+    </div>
+
+    <div class="row g-4">
+      {% for r in rn %}
+      <div class="col-md-6" data-aos="fade-up" data-aos-delay="{{ forloop.counter0 }}00">
+        <div class="card h-100 p-3 d-flex flex-row align-items-center">
+          <img src="{{r.img.url}}" alt="{{r.heading}}" class="me-3 rounded object-fit-cover" width="100" height="100" />
+          <div>
+            <h5 class="mb-2">{{r.heading}}</h5>
+            <p class="mb-0 text-secondary small">
+              {{r.news|truncatechars:100}}
+            </p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+{% endblock content %}

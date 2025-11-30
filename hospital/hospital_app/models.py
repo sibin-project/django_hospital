@@ -1,26 +1,26 @@
 from django.db import models
 
 # Create your models here.
-class Departmet(models.Model):
-    def_name = models.CharField(max_length=100)
-    def_display_name = models.TextField()
-    def_image=models.ImageField(upload_to='images/',default='img')
+class Department(models.Model):
+    department_name = models.CharField(max_length=100)
+    department_description = models.TextField()
+    department_image=models.ImageField(upload_to='images/',default='img')
 
-class doctor(models.Model):
-    doc_name = models.CharField(max_length=100)
-    doc_department = models.CharField(max_length=100)
-    doc_image = models.ImageField(upload_to='images/')
-    doc_specialization = models.TextField()
+class Doctor(models.Model):
+    doctor_name = models.CharField(max_length=100)
+    doctor_department = models.CharField(max_length=100)
+    doctor_image = models.ImageField(upload_to='images/')
+    doctor_specialization = models.TextField()
     def __str__(self):
-        return self.doc_name + "(" +self.doc_department+")"
+        return self.doctor_name + "(" +self.doctor_department+")"
 
-class booking(models.Model):
-    p_name=models.CharField(max_length=255)
-    p_phone=models.CharField(max_length=10)
-    p_email=models.EmailField()
-    doc_name=models.ForeignKey(doctor,on_delete=models.CASCADE)
+class Booking(models.Model):
+    patient_name=models.CharField(max_length=255)
+    patient_phone=models.CharField(max_length=10)
+    patient_email=models.EmailField()
+    doctor_name=models.ForeignKey(Doctor,on_delete=models.CASCADE)
     booking_date=models.DateField()
-    booking_on=models.DateField(auto_now=True)
+    booked_on=models.DateField(auto_now=True)
 
 class contact(models.Model):
         name=models.CharField(max_length=255)

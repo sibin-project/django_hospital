@@ -1,50 +1,36 @@
 {% extends "base.html" %}
-{% block title %}departments{% endblock title %}
+{% block title %}Departments{% endblock title %}
 {% load static %}
 {% block content %}
-  <style>
-    .card-img-top {
-      border-radius: 12px 12px 0 0;
-      height: 180px;
-      object-fit: cover;
-      width: 70%;
-      padding: 5px;
-    }
-    .dept-card {
-      border-radius: 12px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease;
-    }
-    .dept-card:hover {
-      transform: translateY(-5px);
-    }
-   
-  </style>
 
-<h3 class="mb-4 text-center fw-bold">Our Medical Departments</h3>
-<div class="container">
-    <div class="row g-4">
-  {% for d in dept %}
-    <div class="col-md-4 zoom-box ">
-      <div class="card dept-card">
-        <img src="{{ d.def_image.url }}" class="card-img-top" alt="{{ d.def_name }}">
-        <div class="card-body">
-          <h5 class="card-title">{{ d.def_name }}</h5>
-          <p class="card-text">{{ d.def_display_name }}</p>
+<section class="container section-padding">
+  <div class="text-center mb-5" data-aos="fade-up">
+    <h6 class="text-primary fw-bold text-uppercase">Specialties</h6>
+    <h2 class="mb-3">Our Medical Departments</h2>
+    <p class="text-secondary mx-auto" style="max-width: 600px;">We offer a wide range of specialized medical departments
+      to cater to all your health needs.</p>
+  </div>
+
+  <div class="row g-4">
+    {% if dept %}
+    {% for d in dept %}
+    <div class="col-md-4" data-aos="fade-up" data-aos-delay="{{ forloop.counter0 }}00">
+      <div class="card h-100 overflow-hidden">
+        <img src="{{ d.department_image.url }}" class="card-img-top object-fit-cover" alt="{{ d.department_name }}"
+          style="height: 200px;">
+        <div class="card-body p-4">
+          <h5 class="card-title fw-bold text-primary">{{ d.department_name }}</h5>
+          <p class="card-text text-secondary">{{ d.department_description }}</p>
         </div>
       </div>
     </div>
-  {% endfor %}
-</div>
-</div>
-  <script src="https://unpkg.com/scrollreveal"></script>
-  <script>
-    ScrollReveal().reveal('.zoom-box', {
-      duration: 1000,
-      scale: 0.8,
-      opacity: 0,
-      easing: 'ease-in-out',
-      reset: true
-    });
-  </script>
-    {% endblock content %}
+    {% endfor %}
+    {% else %}
+    <div class="col-12 text-center">
+      <p class="text-muted">No departments available at the moment.</p>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+{% endblock content %}

@@ -35,11 +35,11 @@ def contact(request):
         form = ContactForm()
     return render(request, 'contact.html', {'contact_form': form})
 def doctors(request):
-    return render(request, 'doctors.html', {'doc': doctor.objects.all()})
+    return render(request, 'doctors.html', {'doc': Doctor.objects.all()})
 
 def department(request):
     dict_dept={
-        'dept':Departmet.objects.all()
+        'dept':Department.objects.all()
     }
     return render(request,'department.html',dict_dept)
 

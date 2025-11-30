@@ -5,89 +5,62 @@
 <!-- SweetAlert2 for confirmation -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<style>
-  .booking-wrapper {
-    max-width: 600px;
-    margin: auto;
-    background: #f8fbff;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  }
+<div class="container py-5 section-padding">
+  <div class="row justify-content-center">
+    <div class="col-lg-6 col-md-8">
+      <div class="card p-4 p-md-5 border-0 shadow-lg" data-aos="fade-up">
+        <h2 class="text-center mb-4 text-primary fw-bold">Book an Appointment</h2>
+        <form method="post" novalidate>
+          {% csrf_token %}
 
-  .form-control:focus, .form-select:focus {
-    border-color: #1f3b77;
-    box-shadow: 0 0 0 0.2rem rgba(31, 59, 119, 0.25);
-  }
+          {% if form.non_field_errors %}
+          <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+          {% endif %}
 
-  .booking-title {
-    color: #1f3b77;
-    font-weight: 700;
-    text-align: center;
-    margin-bottom: 30px;
-  }
+          <div class="mb-3">
+            <label class="form-label fw-semibold">{{ form.patient_name.label }}</label>
+            {{ form.patient_name }}
+            {% if form.patient_name.errors %}
+            <div class="text-danger small mt-1">{{ form.patient_name.errors|striptags }}</div>
+            {% endif %}
+          </div>
 
-  .btn-book {
-    background-color: #1f3b77;
-    color: white;
-    width: 100%;
-    border-radius: 30px;
-    padding: 10px 0;
-  }
-</style>
+          <div class="mb-3">
+            <label class="form-label fw-semibold">{{ form.patient_phone.label }}</label>
+            {{ form.patient_phone }}
+            {% if form.patient_phone.errors %}
+            <div class="text-danger small mt-1">{{ form.patient_phone.errors|striptags }}</div>
+            {% endif %}
+          </div>
 
-<div class="container py-5">
-  <div class="booking-wrapper">
-    <h2 class="booking-title">Book an Appointment</h2>
-    <form method="post" novalidate>
-      {% csrf_token %}
+          <div class="mb-3">
+            <label class="form-label fw-semibold">{{ form.patient_email.label }}</label>
+            {{ form.patient_email }}
+            {% if form.patient_email.errors %}
+            <div class="text-danger small mt-1">{{ form.patient_email.errors|striptags }}</div>
+            {% endif %}
+          </div>
 
-      {% if form.non_field_errors %}
-        <div class="alert alert-danger">{{ form.non_field_errors }}</div>
-      {% endif %}
+          <div class="mb-3">
+            <label class="form-label fw-semibold">{{ form.doctor_name.label }}</label>
+            {{ form.doctor_name }}
+            {% if form.doctor_name.errors %}
+            <div class="text-danger small mt-1">{{ form.doctor_name.errors|striptags }}</div>
+            {% endif %}
+          </div>
 
-      <div class="mb-3">
-        {{ form.p_name.label_tag }}
-        {{ form.p_name }}
-        {% if form.p_name.errors %}
-          <div class="text-danger small">{{ form.p_name.errors|striptags }}</div>
-        {% endif %}
+          <div class="mb-3">
+            <label class="form-label fw-semibold">{{ form.booking_date.label }}</label>
+            {{ form.booking_date }}
+            {% if form.booking_date.errors %}
+            <div class="text-danger small mt-1">{{ form.booking_date.errors|striptags }}</div>
+            {% endif %}
+          </div>
+
+          <button type="submit" class="btn btn-primary w-100 py-2 mt-3 fw-bold">Submit Booking</button>
+        </form>
       </div>
-
-      <div class="mb-3">
-        {{ form.p_phone.label_tag }}
-        {{ form.p_phone }}
-        {% if form.p_phone.errors %}
-          <div class="text-danger small">{{ form.p_phone.errors|striptags }}</div>
-        {% endif %}
-      </div>
-
-      <div class="mb-3">
-        {{ form.p_email.label_tag }}
-        {{ form.p_email }}
-        {% if form.p_email.errors %}
-          <div class="text-danger small">{{ form.p_email.errors|striptags }}</div>
-        {% endif %}
-      </div>
-
-      <div class="mb-3">
-        {{ form.doc_name.label_tag }}
-        {{ form.doc_name }}
-        {% if form.doc_name.errors %}
-          <div class="text-danger small">{{ form.doc_name.errors|striptags }}</div>
-        {% endif %}
-      </div>
-
-      <div class="mb-3">
-        {{ form.booking_date.label_tag }}
-        {{ form.booking_date }}
-        {% if form.booking_date.errors %}
-          <div class="text-danger small">{{ form.booking_date.errors|striptags }}</div>
-        {% endif %}
-      </div>
-
-      <button type="submit" class="btn btn-book mt-3">Submit Booking</button>
-    </form>
+    </div>
   </div>
 </div>
 
@@ -98,7 +71,8 @@
       title: 'Booking Confirmed!',
       text: 'Your appointment has been scheduled successfully.',
       icon: 'success',
-      confirmButtonText: 'OK'
+      confirmButtonText: 'OK',
+      confirmButtonColor: '#0ea5e9'
     });
   });
 </script>

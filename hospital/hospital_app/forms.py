@@ -1,5 +1,5 @@
 from django import forms
-from .models import booking
+from .models import Booking
 from .models import contact
 
 
@@ -9,20 +9,20 @@ class DateInput(forms.DateInput):
 
 class BookingForm(forms.ModelForm):
     class Meta:
-        model = booking
+        model = Booking
         fields = "__all__"
         widgets = {
             "booking_date": DateInput(),
-            "p_name": forms.TextInput(attrs={"class": "form-control m-2 "}),
-            "p_phone": forms.TextInput(attrs={"class": "form-control m-2"}),
-            "p_email": forms.EmailInput(attrs={"class": "form-control m-2"}),
+            "patient_name": forms.TextInput(attrs={"class": "form-control m-2 "}),
+            "patient_phone": forms.TextInput(attrs={"class": "form-control m-2"}),
+            "patient_email": forms.EmailInput(attrs={"class": "form-control m-2"}),
             
         }
         labels = {
-            "p_name": "Patient Name",
-            "p_phone": "Phone Number",
-            "p_email": "Email Address",
-            "doc_name": "Doctor Name",
+            "patient_name": "Patient Name",
+            "patient_phone": "Phone Number",
+            "patient_email": "Email Address",
+            "doctor_name": "Doctor Name",
             "booking_date": "Booking Date",
         }
 class ContactForm(forms.ModelForm):
