@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Doctors{% endblock title %}
+{% load static %}
+{% block content %}
+
+<section class="container section-padding">
+  <div class="text-center mb-5" data-aos="fade-up">
+    <h6 class="text-primary fw-bold text-uppercase">Our Team</h6>
+    <h2 class="mb-3">Meet Our Doctors</h2>
+    <p class="text-secondary mx-auto" style="max-width: 600px;">Our team of dedicated doctors is here to provide you
+      with the best medical care possible.</p>
+  </div>
+
+  <div class="row g-4">
+    {% if doc %}
+    {% for d in doc %}
+    <div class="col-md-4" data-aos="fade-up" data-aos-delay="{{ forloop.counter0 }}00">
+      <div class="card h-100 p-4 text-center">
+        <img src="{{ d.doctor_image.url }}" alt="{{ d.doctor_name }}"
+          class="rounded-circle mx-auto mb-3 object-fit-cover shadow-sm" style="width: 120px; height: 120px;">
+        <h5 class="text-primary fw-bold mb-1">{{ d.doctor_name }}</h5>
+        <p class="fw-semibold text-secondary mb-1">{{ d.doctor_department }}</p>
+        <p class="text-muted small mb-0">{{ d.doctor_specialization }}</p>
+      </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <div class="col-12 text-center">
+      <p class="text-muted">No doctors available at the moment.</p>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+{% endblock content %}

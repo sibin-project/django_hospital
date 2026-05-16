@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Register{% endblock title %}
+{% load static %}
+
+{% block content %}
+<div class="container section-padding">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5" data-aos="fade-up">
+            <div class="card border-0 shadow-lg p-4 p-md-5">
+                <div class="text-center mb-4">
+                    <i class="fa-solid fa-user-plus fa-3x text-primary mb-3"></i>
+                    <h2 class="fw-bold">Create an Account</h2>
+                    <p class="text-secondary">Join HealthCare Hub to book appointments and manage your health journey.
+                    </p>
+                </div>
+
+                <form method="post" action="{% url 'register' %}">
+                    {% csrf_token %}
+
+                    {% for field in form %}
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">{{ field.label }}</label>
+                        {{ field }}
+                        {% if field.help_text %}
+                        <small class="form-text text-muted d-block mt-1">{{ field.help_text }}</small>
+                        {% endif %}
+                        {% for error in field.errors %}
+                        <div class="text-danger small mt-1">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                    {% endfor %}
+
+                    <button type="submit" class="btn btn-primary w-100 py-2 mt-3 fw-bold">Sign Up</button>
+                </form>
+
+                <div class="text-center mt-4">
+                    <p class="text-secondary">Already have an account? <a href="{% url 'login' %}"
+                            class="text-primary fw-bold">Login here</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
